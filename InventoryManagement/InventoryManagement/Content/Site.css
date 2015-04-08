@@ -1,0 +1,96 @@
+﻿.navbar-static-top {
+  margin-bottom:20px;
+}
+
+i {
+  font-size:16px;
+}
+
+.nav > li > a {
+  color:#787878;
+}
+  
+footer {
+  margin-top:20px;
+  padding-top:20px;
+  padding-bottom:20px;
+  background-color:#efefef;
+}
+
+
+#adminBar{
+    max-width: 250px;
+    margin-left: 15px;
+    
+}
+#info
+{
+	display: inline-block;  
+  
+}
+
+#vendorModal
+{
+  width: 5em; 
+}
+
+
+
+body{}
+.glyphicon { margin-right:10px; }
+.panel-body { padding:0px; }
+.panel-body table tr td { padding-left: 15px }
+.panel-body .table {margin-bottom: 0px; }
+
+#holder
+{
+    margin-left: 0px; 
+    margin-right: 0px;
+}
+
+/* make sidebar nav vertical */ 
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+    border-bottom: 5px;
+  }
+  .sidebar-nav ul:not {
+    display: block;
+  }
+ 
+
+  .sidebar-nav  li {
+    float: none;
+    display: block; 
+    background-color: white;
+  }
+  .sidebar-nav li a {
+    padding-top: 12px;
+    padding-bottom: 12px; 
+
+  }
+
+  .sidebar-nav li.sideNavHeader {
+    float: none; 
+    display: block;
+    padding-top: 12px;
+    padding-bottom: 12px; 
+    padding-left: 15px;
+    background-color: #F3F3F3;
+    color: black;
+    font-size: 1.2em; 
+  }
+
+  /*Row Fluid Over-ride*/
+  .row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+  
+
+  } 
+

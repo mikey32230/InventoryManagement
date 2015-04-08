@@ -1,0 +1,43 @@
+﻿@model IEnumerable<InventoryManagement.AssetType>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Manage Asset Types</h2>
+
+<table class="table table-striped custab">
+    <thead>
+        <a href="@Url.Action("Create", "AssetTypes")" class="btn btn-primary btn-xs pull-right">Add Asset Type</a>
+        <tr>
+            <th>Asset Type</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Type</td>
+            <td class="text-center"><a href="@Url.Action("Edit", "AssetTypes", new{id=item.Id})" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="@Url.Action("Delete", "AssetTypes", new { id=item.Id })" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+        </tr>
+    }
+</table>
+@*@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+      </table>
+*@
+
+

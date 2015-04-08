@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Content/Site.css")
+
+</head>
+<body>
+    <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">XFS Inventory Management</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="@Url.Action("Index", "Home")">Your Assets</a>
+                    </li>
+                    <li>
+                        <a href="#">Search Assets</a>
+                    </li>
+                    <li>
+                        @Html.Partial("_LoginPartial")
+                    </li>
+                </ul>
+
+            </div>
+        </div><!-- /container -->
+    </div>
+
+    <div id="holder" class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 col-md-2">
+                <div class="sidebar-nav" id="adminBar">
+                    <div class="navbar navbar-default" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <span class="visible-xs navbar-brand">Admin Panel</span>
+                        </div>
+                        <div class="navbar-collapse collapse sidebar-navbar-collapse">
+                            <ul class="nav navbar-nav">
+                                <li class="sideNavHeader"><i class="glyphicon glyphicon-plus"></i>Manage</li>
+                                <li><a href="@Url.Action("Index", "AssetTypes")">Asset Types </a></li>
+                                <li><a href="@Url.Action("Index", "AssetModels")">Asset Models</a></li>
+                                <li><a href="@Url.Action("Index", "Vendors")">Vendors</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav">
+                                <li class="sideNavHeader"><i class="glyphicon glyphicon-cog"></i>Configure</li>
+                                <li><a href="#">User Roles</a></li>
+                                <li><a href="#">Email Notification</a></li>
+                                <li><a href="#">Database Backup</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav">
+                                <li class="sideNavHeader"><i class="glyphicon glyphicon-file"></i>Reports</li>
+                                <li><a href="#">Report 1</a></li>
+                                <li><a href="#">Report 2</a></li>
+                                <li><a href="#">Report 3</a></li>
+                                <li><a href="#">Report 4</a></li>
+                            </ul>
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-9 col-md-9 col-lg-">
+                <div class="well">
+                    @RenderBody()
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer></footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
