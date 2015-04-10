@@ -14,18 +14,14 @@ namespace InventoryManagement
     
     public partial class Asset
     {
-        public Asset()
-        {
-            this.AssetUsers = new HashSet<AssetUser>();
-        }
-    
         public int Id { get; set; }
         public Nullable<int> AssetModelId { get; set; }
         public Nullable<System.DateTime> PurchaseDate { get; set; }
         public string SerialNumber { get; set; }
         public string RoomNum { get; set; }
+        public string AssetOwner { get; set; }
     
         public virtual AssetModel AssetModel { get; set; }
-        public virtual ICollection<AssetUser> AssetUsers { get; set; }
+        public virtual AssetUser AssetUser { get; set; }
     }
 }

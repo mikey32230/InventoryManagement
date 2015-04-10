@@ -14,12 +14,16 @@ namespace InventoryManagement
     
     public partial class AssetUser
     {
+        public AssetUser()
+        {
+            this.Assets = new HashSet<Asset>();
+        }
+    
         public string AspNetUserId { get; set; }
-        public int AssetId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
-        public virtual Asset Asset { get; set; }
+        public virtual ICollection<Asset> Assets { get; set; }
     }
 }
