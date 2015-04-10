@@ -60,7 +60,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Manufacturer" Type="nvarchar" MaxLength="50" />
           <Property Name="TypeId" Type="int" />
@@ -69,9 +69,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AssetModelId" Type="int" />
-          <Property Name="UserOwner" Type="nvarchar" MaxLength="50" />
           <Property Name="PurchaseDate" Type="datetime" />
           <Property Name="SerialNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="RoomNum" Type="nvarchar" MaxLength="50" />
@@ -80,9 +79,43 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="AssetUsers">
+          <Key>
+            <PropertyRef Name="AspNetUserId" />
+            <PropertyRef Name="AssetId" />
+          </Key>
+          <Property Name="AspNetUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="AssetId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__AssetUser__AspNe__160F4887">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AssetUsers" Type="Self.AssetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AssetUsers">
+              <PropertyRef Name="AspNetUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AssetUser__Asset__17036CC0">
+          <End Role="Assets" Type="Self.Assets" Multiplicity="1" />
+          <End Role="AssetUsers" Type="Self.AssetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AssetUsers">
+              <PropertyRef Name="AssetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Asset_AssetModel">
           <End Role="AssetModels" Type="Self.AssetModels" Multiplicity="0..1" />
           <End Role="Assets" Type="Self.Assets" Multiplicity="*" />
@@ -172,6 +205,15 @@
           <EntitySet Name="AssetModels" EntityType="Self.AssetModels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Assets" EntityType="Self.Assets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AssetTypes" EntityType="Self.AssetTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AssetUsers" EntityType="Self.AssetUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AssetUser__AspNe__160F4887" Association="Self.FK__AssetUser__AspNe__160F4887">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AssetUsers" EntitySet="AssetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AssetUser__Asset__17036CC0" Association="Self.FK__AssetUser__Asset__17036CC0">
+            <End Role="Assets" EntitySet="Assets" />
+            <End Role="AssetUsers" EntitySet="AssetUsers" />
+          </AssociationSet>
           <AssociationSet Name="FK_Asset_AssetModel" Association="Self.FK_Asset_AssetModel">
             <End Role="AssetModels" EntitySet="AssetModels" />
             <End Role="Assets" EntitySet="Assets" />
@@ -249,13 +291,14 @@
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AssetUsers" Relationship="Self.FK__AssetUser__AspNe__160F4887" FromRole="AspNetUsers" ToRole="AssetUsers" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="AssetModel">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Manufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TypeId" Type="Int32" />
@@ -266,21 +309,33 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AssetModelId" Type="Int32" />
-          <Property Name="UserOwner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
           <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RoomNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AssetModel" Relationship="Self.FK_Asset_AssetModel" FromRole="Assets" ToRole="AssetModels" />
+          <NavigationProperty Name="AssetUsers" Relationship="Self.FK__AssetUser__Asset__17036CC0" FromRole="Assets" ToRole="AssetUsers" />
         </EntityType>
         <EntityType Name="AssetType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AssetModels" Relationship="Self.FK_AssetModel_AssetType" FromRole="AssetTypes" ToRole="AssetModels" />
+        </EntityType>
+        <EntityType Name="AssetUser">
+          <Key>
+            <PropertyRef Name="AspNetUserId" />
+            <PropertyRef Name="AssetId" />
+          </Key>
+          <Property Name="AspNetUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AssetId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__AssetUser__AspNe__160F4887" FromRole="AssetUsers" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Asset" Relationship="Self.FK__AssetUser__Asset__17036CC0" FromRole="AssetUsers" ToRole="Assets" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -310,6 +365,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__AssetUser__AspNe__160F4887">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="AssetUsers" Type="Self.AssetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AssetUsers">
+              <PropertyRef Name="AspNetUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Asset_AssetModel">
           <End Role="AssetModels" Type="Self.AssetModel" Multiplicity="0..1" />
           <End Role="Assets" Type="Self.Asset" Multiplicity="*" />
@@ -334,6 +401,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__AssetUser__Asset__17036CC0">
+          <End Role="Assets" Type="Self.Asset" Multiplicity="1" />
+          <End Role="AssetUsers" Type="Self.AssetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AssetUsers">
+              <PropertyRef Name="AssetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
@@ -346,6 +425,7 @@
           <EntitySet Name="AssetModels" EntityType="Self.AssetModel" />
           <EntitySet Name="Assets" EntityType="Self.Asset" />
           <EntitySet Name="AssetTypes" EntityType="Self.AssetType" />
+          <EntitySet Name="AssetUsers" EntityType="Self.AssetUser" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -354,6 +434,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
+          <AssociationSet Name="FK__AssetUser__AspNe__160F4887" Association="Self.FK__AssetUser__AspNe__160F4887">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AssetUsers" EntitySet="AssetUsers" />
+          </AssociationSet>
           <AssociationSet Name="FK_Asset_AssetModel" Association="Self.FK_Asset_AssetModel">
             <End Role="AssetModels" EntitySet="AssetModels" />
             <End Role="Assets" EntitySet="Assets" />
@@ -361,6 +445,10 @@
           <AssociationSet Name="FK_AssetModel_AssetType" Association="Self.FK_AssetModel_AssetType">
             <End Role="AssetTypes" EntitySet="AssetTypes" />
             <End Role="AssetModels" EntitySet="AssetModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AssetUser__Asset__17036CC0" Association="Self.FK__AssetUser__Asset__17036CC0">
+            <End Role="Assets" EntitySet="Assets" />
+            <End Role="AssetUsers" EntitySet="AssetUsers" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -433,7 +521,6 @@
               <MappingFragment StoreEntitySet="Assets">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="AssetModelId" ColumnName="AssetModelId" />
-                <ScalarProperty Name="UserOwner" ColumnName="UserOwner" />
                 <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
                 <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
                 <ScalarProperty Name="RoomNum" ColumnName="RoomNum" />
@@ -445,6 +532,16 @@
               <MappingFragment StoreEntitySet="AssetTypes">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssetUsers">
+            <EntityTypeMapping TypeName="Model.AssetUser">
+              <MappingFragment StoreEntitySet="AssetUsers">
+                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
+                <ScalarProperty Name="AssetId" ColumnName="AssetId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
