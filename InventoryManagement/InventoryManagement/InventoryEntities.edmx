@@ -39,14 +39,6 @@
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
-        <EntityType Name="AspNetUserRoles1">
-          <Key>
-            <PropertyRef Name="AspNetRoles_Id" />
-            <PropertyRef Name="AspNetUsers_Id" />
-          </Key>
-          <Property Name="AspNetRoles_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="AspNetUsers_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-        </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
@@ -80,17 +72,9 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="AssetModelId" Type="int" />
           <Property Name="UserOwner" Type="nvarchar" MaxLength="50" />
-          <Property Name="VendorId" Type="int" />
           <Property Name="PurchaseDate" Type="datetime" />
-          <Property Name="AssignedDate" Type="datetime" />
-          <Property Name="LastModifiedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="SerialNumber" Type="nvarchar" MaxLength="50" />
-          <Property Name="PurchaseType" Type="nvarchar" MaxLength="50" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" />
-          <Property Name="Department" Type="nvarchar" MaxLength="50" />
           <Property Name="RoomNum" Type="nvarchar" MaxLength="50" />
-          <Property Name="LastModifedDate" Type="datetime" />
-          <Property Name="CommunityUse" Type="bit" />
         </EntityType>
         <EntityType Name="AssetTypes">
           <Key>
@@ -99,72 +83,6 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Contacts">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Phone" Type="nchar" MaxLength="10" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" />
-          <Property Name="Fax" Type="nvarchar" MaxLength="50" />
-          <Property Name="StreetName" Type="nvarchar" MaxLength="50" />
-          <Property Name="State" Type="nvarchar" MaxLength="50" />
-          <Property Name="Zip" Type="nchar" MaxLength="10" />
-          <Property Name="VendorId" Type="int" />
-        </EntityType>
-        <EntityType Name="Departments">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="DepartmentName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Coordinator" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Vendors">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <Association Name="FK_AspNetUserRoles1_AspNetRole">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
-          <End Role="AspNetUserRoles1" Type="Self.AspNetUserRoles1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles1">
-              <PropertyRef Name="AspNetRoles_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AspNetUserRoles1_AspNetUser">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="AspNetUserRoles1" Type="Self.AspNetUserRoles1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles1">
-              <PropertyRef Name="AspNetUsers_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Asset_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Assets" Type="Self.Assets" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Assets">
-              <PropertyRef Name="LastModifiedBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Asset_AssetModel">
           <End Role="AssetModels" Type="Self.AssetModels" Multiplicity="0..1" />
           <End Role="Assets" Type="Self.Assets" Multiplicity="*" />
@@ -177,18 +95,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Asset_Vendor">
-          <End Role="Vendors" Type="Self.Vendors" Multiplicity="0..1" />
-          <End Role="Assets" Type="Self.Assets" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vendors">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Assets">
-              <PropertyRef Name="VendorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AssetModel_AssetType">
           <End Role="AssetTypes" Type="Self.AssetTypes" Multiplicity="0..1" />
           <End Role="AssetModels" Type="Self.AssetModels" Multiplicity="*" />
@@ -198,18 +104,6 @@
             </Principal>
             <Dependent Role="AssetModels">
               <PropertyRef Name="TypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Contact_Vendor">
-          <End Role="Vendors" Type="Self.Vendors" Multiplicity="0..1" />
-          <End Role="Contacts" Type="Self.Contacts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vendors">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Contacts">
-              <PropertyRef Name="VendorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -274,41 +168,17 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserRoles1" EntityType="Self.AspNetUserRoles1" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AssetModels" EntityType="Self.AssetModels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Assets" EntityType="Self.Assets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AssetTypes" EntityType="Self.AssetTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Vendors" EntityType="Self.Vendors" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_AspNetUserRoles1_AspNetRole" Association="Self.FK_AspNetUserRoles1_AspNetRole">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUserRoles1" EntitySet="AspNetUserRoles1" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AspNetUserRoles1_AspNetUser" Association="Self.FK_AspNetUserRoles1_AspNetUser">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserRoles1" EntitySet="AspNetUserRoles1" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Asset_AspNetUsers" Association="Self.FK_Asset_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Assets" EntitySet="Assets" />
-          </AssociationSet>
           <AssociationSet Name="FK_Asset_AssetModel" Association="Self.FK_Asset_AssetModel">
             <End Role="AssetModels" EntitySet="AssetModels" />
-            <End Role="Assets" EntitySet="Assets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Asset_Vendor" Association="Self.FK_Asset_Vendor">
-            <End Role="Vendors" EntitySet="Vendors" />
             <End Role="Assets" EntitySet="Assets" />
           </AssociationSet>
           <AssociationSet Name="FK_AssetModel_AssetType" Association="Self.FK_AssetModel_AssetType">
             <End Role="AssetTypes" EntitySet="AssetTypes" />
             <End Role="AssetModels" EntitySet="AssetModels" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contact_Vendor" Association="Self.FK_Contact_Vendor">
-            <End Role="Vendors" EntitySet="Vendors" />
-            <End Role="Contacts" EntitySet="Contacts" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -339,7 +209,6 @@
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
-          <NavigationProperty Name="AspNetUsers1" Relationship="Self.AspNetUserRoles1" FromRole="AspNetRoles" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
@@ -380,9 +249,7 @@
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="Assets" Relationship="Self.FK_Asset_AspNetUsers" FromRole="AspNetUsers" ToRole="Assets" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-          <NavigationProperty Name="AspNetRoles1" Relationship="Self.AspNetUserRoles1" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="AssetModel">
           <Key>
@@ -402,20 +269,10 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="AssetModelId" Type="Int32" />
           <Property Name="UserOwner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="VendorId" Type="Int32" />
           <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
-          <Property Name="AssignedDate" Type="DateTime" Precision="3" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PurchaseType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RoomNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastModifedDate" Type="DateTime" Precision="3" />
-          <Property Name="CommunityUse" Type="Boolean" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Asset_AspNetUsers" FromRole="Assets" ToRole="AspNetUsers" />
           <NavigationProperty Name="AssetModel" Relationship="Self.FK_Asset_AssetModel" FromRole="Assets" ToRole="AssetModels" />
-          <NavigationProperty Name="Vendor" Relationship="Self.FK_Asset_Vendor" FromRole="Assets" ToRole="Vendors" />
         </EntityType>
         <EntityType Name="AssetType">
           <Key>
@@ -424,39 +281,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AssetModels" Relationship="Self.FK_AssetModel_AssetType" FromRole="AssetTypes" ToRole="AssetModels" />
-        </EntityType>
-        <EntityType Name="Contact">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="StreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Zip" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="VendorId" Type="Int32" />
-          <NavigationProperty Name="Vendor" Relationship="Self.FK_Contact_Vendor" FromRole="Contacts" ToRole="Vendors" />
-        </EntityType>
-        <EntityType Name="Department">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="DepartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Coordinator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Vendor">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Assets" Relationship="Self.FK_Asset_Vendor" FromRole="Vendors" ToRole="Assets" />
-          <NavigationProperty Name="Contacts" Relationship="Self.FK_Contact_Vendor" FromRole="Vendors" ToRole="Contacts" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -486,18 +310,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Asset_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
-          <End Role="Assets" Type="Self.Asset" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Assets">
-              <PropertyRef Name="LastModifiedBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Asset_AssetModel">
           <End Role="AssetModels" Type="Self.AssetModel" Multiplicity="0..1" />
           <End Role="Assets" Type="Self.Asset" Multiplicity="*" />
@@ -522,35 +334,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Asset_Vendor">
-          <End Role="Vendors" Type="Self.Vendor" Multiplicity="0..1" />
-          <End Role="Assets" Type="Self.Asset" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vendors">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Assets">
-              <PropertyRef Name="VendorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Contact_Vendor">
-          <End Role="Vendors" Type="Self.Vendor" Multiplicity="0..1" />
-          <End Role="Contacts" Type="Self.Contact" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vendors">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Contacts">
-              <PropertyRef Name="VendorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
-        </Association>
-        <Association Name="AspNetUserRoles1">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
         </Association>
@@ -562,9 +346,6 @@
           <EntitySet Name="AssetModels" EntityType="Self.AssetModel" />
           <EntitySet Name="Assets" EntityType="Self.Asset" />
           <EntitySet Name="AssetTypes" EntityType="Self.AssetType" />
-          <EntitySet Name="Contacts" EntityType="Self.Contact" />
-          <EntitySet Name="Departments" EntityType="Self.Department" />
-          <EntitySet Name="Vendors" EntityType="Self.Vendor" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -572,10 +353,6 @@
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Asset_AspNetUsers" Association="Self.FK_Asset_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Assets" EntitySet="Assets" />
           </AssociationSet>
           <AssociationSet Name="FK_Asset_AssetModel" Association="Self.FK_Asset_AssetModel">
             <End Role="AssetModels" EntitySet="AssetModels" />
@@ -585,19 +362,7 @@
             <End Role="AssetTypes" EntitySet="AssetTypes" />
             <End Role="AssetModels" EntitySet="AssetModels" />
           </AssociationSet>
-          <AssociationSet Name="FK_Asset_Vendor" Association="Self.FK_Asset_Vendor">
-            <End Role="Vendors" EntitySet="Vendors" />
-            <End Role="Assets" EntitySet="Assets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contact_Vendor" Association="Self.FK_Contact_Vendor">
-            <End Role="Vendors" EntitySet="Vendors" />
-            <End Role="Contacts" EntitySet="Contacts" />
-          </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles1" Association="Self.AspNetUserRoles1">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
@@ -669,17 +434,9 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="AssetModelId" ColumnName="AssetModelId" />
                 <ScalarProperty Name="UserOwner" ColumnName="UserOwner" />
-                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
                 <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
-                <ScalarProperty Name="AssignedDate" ColumnName="AssignedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
                 <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
-                <ScalarProperty Name="PurchaseType" ColumnName="PurchaseType" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="RoomNum" ColumnName="RoomNum" />
-                <ScalarProperty Name="LastModifedDate" ColumnName="LastModifedDate" />
-                <ScalarProperty Name="CommunityUse" ColumnName="CommunityUse" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -691,53 +448,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Contacts">
-            <EntityTypeMapping TypeName="Model.Contact">
-              <MappingFragment StoreEntitySet="Contacts">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Fax" ColumnName="Fax" />
-                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Zip" ColumnName="Zip" />
-                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Departments">
-            <EntityTypeMapping TypeName="Model.Department">
-              <MappingFragment StoreEntitySet="Departments">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
-                <ScalarProperty Name="Coordinator" ColumnName="Coordinator" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Vendors">
-            <EntityTypeMapping TypeName="Model.Vendor">
-              <MappingFragment StoreEntitySet="Vendors">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
             <EndProperty Name="AspNetUsers">
               <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles1" TypeName="Model.AspNetUserRoles1" StoreEntitySet="AspNetUserRoles1">
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="AspNetRoles_Id" />
-            </EndProperty>
-            <EndProperty Name="AspNetUsers">
-              <ScalarProperty Name="Id" ColumnName="AspNetUsers_Id" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

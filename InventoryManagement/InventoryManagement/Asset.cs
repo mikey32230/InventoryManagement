@@ -17,20 +17,10 @@ namespace InventoryManagement
         public int Id { get; set; }
         public Nullable<int> AssetModelId { get; set; }
         public string UserOwner { get; set; }
-        public Nullable<int> VendorId { get; set; }
         public Nullable<System.DateTime> PurchaseDate { get; set; }
-        public Nullable<System.DateTime> AssignedDate { get; set; }
-        public string LastModifiedBy { get; set; }
         public string SerialNumber { get; set; }
-        public string PurchaseType { get; set; }
-        public string Status { get; set; }
-        public string Department { get; set; }
         public string RoomNum { get; set; }
-        public Nullable<System.DateTime> LastModifedDate { get; set; }
-        public Nullable<bool> CommunityUse { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
         public virtual AssetModel AssetModel { get; set; }
-        public virtual Vendor Vendor { get; set; }
     }
 }

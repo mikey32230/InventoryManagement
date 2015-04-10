@@ -32,8 +32,5 @@ namespace InventoryManagement
         public virtual DbSet<AssetModel> AssetModels { get; set; }
         public virtual DbSet<Asset> Assets { get; set; }
         public virtual DbSet<AssetType> AssetTypes { get; set; }
-        public virtual DbSet<Contact> Contacts { get; set; }
-        public virtual DbSet<Department> Departments { get; set; }
-        public virtual DbSet<Vendor> Vendors { get; set; }
     }
 }

@@ -181,18 +181,11 @@
     <Compile Include="AssetType.cs">
       <DependentUpon>InventoryEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Contact.cs">
-      <DependentUpon>InventoryEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AssetTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QueryController.cs" />
-    <Compile Include="Controllers\VendorsController.cs" />
-    <Compile Include="Department.cs">
-      <DependentUpon>InventoryEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -215,12 +208,8 @@
     <Compile Include="Models\AssetQuery.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\VendorContactWrap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Vendor.cs">
-      <DependentUpon>InventoryEntities.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -229,7 +218,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="InventoryEntities.edmx.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="InventoryEntities.edmx">
@@ -302,11 +290,6 @@
     <Content Include="Views\AssetTypes\Details.cshtml" />
     <Content Include="Views\AssetTypes\Edit.cshtml" />
     <Content Include="Views\AssetTypes\Delete.cshtml" />
-    <Content Include="Views\Vendors\Index.cshtml" />
-    <Content Include="Views\Vendors\Edit.cshtml" />
-    <Content Include="Views\Vendors\Details.cshtml" />
-    <Content Include="Views\Vendors\Delete.cshtml" />
-    <Content Include="Views\Vendors\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
