@@ -10,6 +10,7 @@ using InventoryManagement;
 
 namespace InventoryManagement.Controllers
 {
+    [Authorize]
     public class AssetTypesController : Controller
     {
         private InventoryEntities db = new InventoryEntities();
