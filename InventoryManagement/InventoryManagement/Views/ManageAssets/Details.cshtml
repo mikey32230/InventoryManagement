@@ -1,0 +1,58 @@
+﻿@model InventoryManagement.Asset
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Asset</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SerialNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SerialNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoomNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoomNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssetModel.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssetModel.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssetUser.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssetUser.FirstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
