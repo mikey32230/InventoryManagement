@@ -7,18 +7,30 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using InventoryManagement;
+using InventoryManagement.Models; 
 
 namespace InventoryManagement.Controllers
 {
     public class ManageAssetsController : Controller
     {
         private InventoryEntities db = new InventoryEntities();
+        
 
         // GET: ManageAssets
         public ActionResult Index()
         {
             var assets = db.Assets.Include(a => a.AssetModel).Include(a => a.AssetUser);
-            return View(assets.ToList());
+            //Option to use ViewModel - Coded before learning about DisplayTemplates
+            
+            //List<AssetViewModel> viewModel = new List<AssetViewModel>();  
+            //foreach(Asset a in assets)
+            //{
+            //    var toAddViewModel = new AssetViewModel();
+            //    toAddViewModel.asset = a; 
+            //    viewModel.Add(toAddViewModel); 
+            //}
+            return View(assets); 
+           
         }
 
         // GET: ManageAssets/Details/5
