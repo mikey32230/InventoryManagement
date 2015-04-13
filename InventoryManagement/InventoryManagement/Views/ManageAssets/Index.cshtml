@@ -16,10 +16,9 @@
             </th>
             <th>
                 Model Name
-                @*@Html.DisplayNameFor(model => model.AssetModel.Name)*@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AssetUser.LastName)
+                Asset Owner
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RoomNum)
@@ -38,13 +37,13 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.SerialNumber)
-
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AssetModel.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AssetUser.LastName)
+                @*@Html.DisplayFor(modelItem => item.AssetUser.LastName)*@
+                @String.Concat(@item.AssetUser.LastName, " ",@item.AssetUser.FirstName) 
 
             </td>
             <td>
