@@ -1,0 +1,48 @@
+﻿@model IEnumerable<InventoryManagement.AssetModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>
+        Manage Asset Models
+        <a href="@Url.Action("Create", "AssetModels")" class="btn-primary btn-xs pull-right">Add Asset Model</a> 
+</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Manufacturer)</th>
+            <th>@Html.DisplayNameFor(model => model.AssetType.Type)</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Manufacturer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssetType.Type)
+        </td>
+        <td class="text-center">
+            <a href="@Url.Action("Edit", "AssetModels", new{id=item.Id})" class='btn btn-info btn-xs'>
+                <span class="glyphicon glyphicon-edit"></span>
+                Edit
+            </a>
+            <a href="@Url.Action("Delete", "AssetModels", new { id=item.Id })" class="btn btn-danger btn-xs">
+                <span class="glyphicon glyphicon-remove"></span>
+                Del
+            </a>
+        </td>
+    </tr>
+}
+
+</table>
