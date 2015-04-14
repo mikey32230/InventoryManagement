@@ -16,16 +16,16 @@
             </th>
             <th>
                 Model Name
-                @*@Html.DisplayNameFor(model => model.AssetModel.Name)*@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AssetUser.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PurchaseDate)
+                Asset Owner
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RoomNum)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseDate)
             </th>
 
             <th class="text-center">Action</th>
@@ -36,19 +36,21 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.PurchaseDate)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.SerialNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomNum)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AssetModel.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AssetUser.LastName)
+                @*@Html.DisplayFor(modelItem => item.AssetUser.LastName)*@
+                @String.Concat(@item.AssetUser.LastName, " ",@item.AssetUser.FirstName) 
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchaseDate)
             </td>
             <td class="text-center"><a href="@Url.Action("Edit", "ManageAssets", new{id=item.Id})" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="@Url.Action("Delete", "ManageAssets", new { id=item.Id })" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
         </tr>
