@@ -21,5 +21,10 @@ namespace InventoryManagement
                 return new SelectList(_types, "Types");
             }
         }
+
+        public void SetTypes(IEnumerable<AssetType> types)
+        {
+            _types = types.Select(t => t.Type = t.Type);
+        }
     }
 }

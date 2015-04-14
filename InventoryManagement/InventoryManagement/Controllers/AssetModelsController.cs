@@ -20,33 +20,29 @@ namespace InventoryManagement.Controllers
         public ActionResult Create()          
         {
             InventoryEntities context = new InventoryEntities();
-
             return View(new AssetModel(context.AssetTypes));
-        //    return View();
         }
 
         // POST: AssetModels/Create
         [HttpPost]
         public ActionResult Create(AssetModel am)
         {
-            using (var context = new InventoryEntities())
-            {
-                //var newAssetModel =  new AssetModel()
-                //{
-                //    AssetType = am.AssetType,
-                //    Manufacturer = am.Manufacturer,
-                //    Name = am.Name
-                //};
-                context.AssetModels.Add(am);
-                context.SaveChanges();
-                return RedirectToAction("Index", "AssetModels");
-            }
+            InventoryEntities context = new InventoryEntities();
+            context.AssetModels.Add(am);
+            context.SaveChanges();
+            return RedirectToAction("Index", "AssetModels");
         }
 
         // GET: AssetModels/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            //Figure out how to handle nulls
+
+            InventoryEntities context = new InventoryEntities();
+
+            var assetModel = context.AssetModels.Where(x => x.Id == id).FirstOrDefault();
+            assetModel.SetTypes(context.AssetTypes);
+            return View(assetModel);
         }
 
         // POST: AssetModels/Edit/5
