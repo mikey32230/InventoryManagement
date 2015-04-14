@@ -211,8 +211,12 @@
       <DependentUpon>InventoryEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\AssetModel.cs" />
     <Compile Include="Models\AssetQuery.cs" />
+=======
+    <Compile Include="Models\AssetViewModel.cs" />
+>>>>>>> origin/master
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -305,8 +309,12 @@
     <Content Include="Views\ManageAssets\Edit.cshtml" />
     <Content Include="Views\ManageAssets\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\AssetModels\Index.cshtml" />
     <Content Include="Views\AssetModels\Create.cshtml" />
+=======
+    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
+>>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
