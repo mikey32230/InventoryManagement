@@ -11,11 +11,16 @@ namespace InventoryManagement
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Asset
     {
         public int Id { get; set; }
         public Nullable<int> AssetModelId { get; set; }
+        
+       
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> PurchaseDate { get; set; }
         public string SerialNumber { get; set; }
         public string RoomNum { get; set; }

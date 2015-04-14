@@ -88,7 +88,6 @@ namespace InventoryManagement.Controllers
                 return HttpNotFound();
             }
             ViewBag.AssetModelId = new SelectList(db.AssetModels, "Id", "Name", asset.AssetModelId);
-            ViewBag.AssetOwner = new SelectList(db.AssetUsers, "AspNetUserId", "FirstName", asset.AssetOwner);
             return View(asset);
         }
 
@@ -106,7 +105,7 @@ namespace InventoryManagement.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.AssetModelId = new SelectList(db.AssetModels, "Id", "Name", asset.AssetModelId);
-            ViewBag.AssetOwner = new SelectList(db.AssetUsers, "AspNetUserId", "FirstName", asset.AssetOwner);
+            //ViewBag.AssetOwner = new SelectList(db.AssetUsers, "AspNetUserId", "FirstName", asset.AssetOwner);
             return View(asset);
         }
 

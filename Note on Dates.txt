@@ -1,0 +1,11 @@
+In case of overriding the EDMX File in the future: 
+
+Google's HTML 5 picker does not bind properly with the DateTime values. 
+
+The solution is to add the following annotations to the class of interest
+
+[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+[DataType(DataType.Date)]
+
+
+Do NOT change the format string to match how you'd actually like the date to display.  
