@@ -344,6 +344,7 @@
     <Content Include="Views\AssetModels\Create.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\AssetModels\Edit.cshtml" />
+    <Content Include="Views\ManageAssets\Reassign.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

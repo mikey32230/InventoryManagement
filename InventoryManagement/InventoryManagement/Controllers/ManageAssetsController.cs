@@ -135,6 +135,40 @@ namespace InventoryManagement.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: ManageAssets/Reassign/5
+        public ActionResult Reassign(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Asset asset = db.Assets.Find(id);
+            if (asset == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.AssetOwner = new SelectList(db.AssetUsers, "AspNetUserId", "FirstName", asset.AssetOwner);
+            return View(asset);
+        }
+
+        // POST: ManageAssets/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Reassign([Bind(Include = "Id,AssetModelId,PurchaseDate,SerialNumber,RoomNum,AssetOwner")] Asset asset)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(asset).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            
+            //ViewBag.AssetOwner = new SelectList(db.AssetUsers, "AspNetUserId", "FirstName", asset.AssetOwner);
+            return View(asset);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
