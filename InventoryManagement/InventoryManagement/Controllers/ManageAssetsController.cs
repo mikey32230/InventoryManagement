@@ -7,21 +7,23 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using InventoryManagement;
-using InventoryManagement.Models; 
+using InventoryManagement.Models;
+
 
 namespace InventoryManagement.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ManageAssetsController : Controller
     {
         private InventoryEntities db = new InventoryEntities();
-        
+
 
         // GET: ManageAssets
         public ActionResult Index()
         {
             var assets = db.Assets.Include(a => a.AssetModel).Include(a => a.AssetUser);
             //Option to use ViewModel - Coded before learning about DisplayTemplates
-            
+
             //List<AssetViewModel> viewModel = new List<AssetViewModel>();  
             //foreach(Asset a in assets)
             //{
@@ -29,8 +31,51 @@ namespace InventoryManagement.Controllers
             //    toAddViewModel.asset = a; 
             //    viewModel.Add(toAddViewModel); 
             //}
-            return View(assets); 
-           
+            return View(assets);
+
+        }
+
+        [HttpPost]
+        // Post: ManageAssets
+        public ActionResult Index(String serialNumber, String modelName, String owner, String roomNumber, DateTime? purchaseDate)
+        {
+            var assets = db.Assets.Include(a => a.AssetModel).Include(a => a.AssetUser);
+
+            if (!String.IsNullOrEmpty(serialNumber))
+            {
+                assets = assets.Where(a => a.SerialNumber == serialNumber);
+            }
+            if (!String.IsNullOrEmpty(modelName))
+            {
+                assets = assets.Where(a => a.AssetModel.Name == modelName);
+            }
+            if (!String.IsNullOrEmpty(owner))
+            {
+                
+                //Use .split to separate first and last name 
+                //Trim whitespace 
+                var stringPartition = owner.Split(',');
+                String lName = stringPartition[0].Trim();
+                assets = assets.Where(a=>a.AssetUser.LastName.StartsWith(lName)); 
+                if(stringPartition.Length >=2)
+                {
+                    String fNAme = stringPartition[1].Trim();
+                    assets = assets.Where(a=>a.AssetUser.FirstName.StartsWith(fNAme));
+                }
+                
+            }
+            if (!String.IsNullOrEmpty(roomNumber))
+            {
+                assets = assets.Where(a => a.RoomNum == roomNumber);
+            }
+            if (purchaseDate != null)
+            {
+                //Remove the Time portion of the DateTime 
+                assets = assets.Where(a => DbFunctions.TruncateTime(a.PurchaseDate) == DbFunctions.TruncateTime(purchaseDate));
+            }
+
+            return View(assets);
+
         }
 
         // GET: ManageAssets/Details/5
@@ -164,7 +209,7 @@ namespace InventoryManagement.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            
+
             //ViewBag.AssetOwner = new SelectList(db.AssetUsers, "AspNetUserId", "FirstName", asset.AssetOwner);
             return View(asset);
         }

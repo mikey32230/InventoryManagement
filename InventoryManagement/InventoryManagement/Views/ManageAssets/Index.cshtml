@@ -6,54 +6,89 @@
 
 <h2>Manage Assets</h2>
 
-<table class="table table-striped">
-
-    <thead>
-        <a href="@Url.Action("Create", "ManageAssets")" class="btn btn-primary btn-xs pull-right">Add Asset</a>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.SerialNumber)
-            </th>
-            <th>
-                Model Name
-            </th>
-            <th>
-                Asset Owner
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RoomNum)
-
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PurchaseDate)
-            </th>
-
-            <th class="text-center">Action</th>
-        </tr>
-    </thead>
-
-    @foreach (var item in Model)
+@using (Html.BeginForm())
+{
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SerialNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AssetModel.Name)
-            </td>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.AssetUser.LastName)*@
-                @String.Concat(@item.AssetUser.LastName, " ",@item.AssetUser.FirstName) 
+        <table class="table table-striped">
+            <thead>
+                <a href="@Url.Action("Create", "ManageAssets")" class="btn btn-primary btn-xs pull-right">Add Asset</a>
+                <tr>
+                    <th>
+                        Serial Number
+                    </th>
+                    <th>
+                        Model Name
+                    </th>
+                    <th>
+                        Asset Owner
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoomNum)
 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomNum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PurchaseDate)
-            </td>
-            <td class="text-center"><a href="@Url.Action("Reassign", "ManageAssets", new{id=item.Id})" class="btn btn-xs btn btn-info"><span class="glyphicon glyphicon-user"></span> Reassign  </a> <a href="@Url.Action("Edit", "ManageAssets", new{id=item.Id})" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="@Url.Action("Delete", "ManageAssets", new { id=item.Id })" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-        </tr>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PurchaseDate)
+                    </th>
+
+                    <th class="text-center" colspan="3">Action</th>
+                </tr>
+            </thead>
+
+            <tr>
+                <td>
+                    <input type="text" name="serialNumber" id="serialNumber" class="form-control tableSearch" placeholder="Serial Number" />
+                </td>
+                <td>
+                    <input type="text" name="modelName" id="modelName" class="form-control tableSearch" placeholder="Model Names" />
+                </td>
+                <td>
+                    <input type="text" name="owner" id="owner" class="form-control tableSearch" placeholder="LastName, FirstName" />
+                </td>
+                <td>
+                    <input type="text" name="roomNumber" id="roomNumber" class="form-control tableSearch" placeholder="Room #" />
+                </td>
+                <td>
+                    <input type="date" name="purchaseDate" id="purchaseDate" class="form-control tableSearch" placeholder="Purchase Date" />
+                </td>
+                <td colspan="3">
+                    <input type="submit" class="btn btn-default tableSearchButton" />
+                </td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SerialNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AssetModel.Name)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.AssetUser.LastName)*@
+                        @String.Concat(@item.AssetUser.LastName, " ", @item.AssetUser.FirstName)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoomNum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PurchaseDate)
+                    </td>
+                    <td class="text-center">
+                        <a href="@Url.Action("Reassign", "ManageAssets", new{id=item.Id})" class="btn btn-xs btn btn-success"><span class="glyphicon glyphicon-user"></span></a>
+                    </td>
+                    <td class="text-center">
+                        <a href="@Url.Action("Edit", "ManageAssets", new{id=item.Id})" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span></a>
+                    </td>
+                    <td class="text-center">
+                        <a href="@Url.Action("Delete", "ManageAssets", new { id=item.Id })" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></a>
+                    </td>
+                </tr>
+            }
+
+        </table>
     }
 
-</table>
+}
+
+

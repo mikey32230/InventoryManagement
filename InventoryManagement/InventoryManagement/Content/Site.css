@@ -1,96 +1,125 @@
 ﻿.navbar-static-top {
-  margin-bottom:20px;
+    margin-bottom: 20px;
 }
 
 i {
-  font-size:16px;
+    font-size: 16px;
 }
 
 .nav > li > a {
-  color:#787878;
+    color: #787878;
 }
-  
+
 footer {
-  margin-top:20px;
-  padding-top:20px;
-  padding-bottom:20px;
-  background-color:#efefef;
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #efefef;
 }
 
 
-#adminBar{
+#adminBar {
     max-width: 250px;
     margin-left: 15px;
-    
-}
-#info
-{
-	display: inline-block;  
-  
 }
 
-#vendorModal
-{
-  width: 5em; 
+#info {
+    display: inline-block;
+}
+
+#vendorModal {
+    width: 5em;
 }
 
 
 
-body{}
-.glyphicon { margin-right:10px; }
-.panel-body { padding:0px; }
-.panel-body table tr td { padding-left: 15px }
-.panel-body .table {margin-bottom: 0px; }
+body {
+}
 
-#holder
-{
-    margin-left: 0px; 
+.glyphicon {
+    margin-right: 10px;
+}
+
+.panel-body {
+    padding: 0px;
+}
+
+    .panel-body table tr td {
+        padding-left: 15px;
+    }
+
+    .panel-body .table {
+        margin-bottom: 0px;
+    }
+
+#holder {
+    margin-left: 0px;
     margin-right: 0px;
 }
 
-/* make sidebar nav vertical */ 
-@media (min-width: 768px) {
-  .sidebar-nav .navbar .navbar-collapse {
-    padding: 0;
-    max-height: none;
-  }
-  .sidebar-nav .navbar ul {
-    float: none;
-    border-bottom: 5px;
-  }
-  .sidebar-nav ul:not {
-    display: block;
-  }
- 
 
-  .sidebar-nav  li {
-    float: none;
-    display: block; 
-    background-color: white;
-  }
-  .sidebar-nav li a {
-    padding-top: 12px;
-    padding-bottom: 12px; 
 
-  }
-
-  .sidebar-nav li.sideNavHeader {
-    float: none; 
-    display: block;
-    padding-top: 12px;
-    padding-bottom: 12px; 
-    padding-left: 15px;
-    background-color: #F3F3F3;
-    color: black;
-    font-size: 1.2em; 
-  }
-
-  /*Row Fluid Over-ride*/
-  .row {
-  margin-left: 0px;
-  margin-right: 0px;
+/*Table with less padding */
+.table thead > tr > th,
+.table tbody > tr > th,
+.table tfoot > tr > th,
+.table thead > tr > td,
+.table tbody > tr > td,
+.table tfoot > tr > td {
+  padding: 4px;
+  line-height: 1.428571429;
+  vertical-align: top;
+  border-top: 1px solid #dddddd;
 }
-  
 
-  } 
 
+.tableSearchButton{
+    margin-left: 50%; 
+    -webkit-transform:translateX(-50%);
+}
+
+/* make sidebar nav vertical */
+@media (min-width: 768px) {
+    .sidebar-nav .navbar .navbar-collapse {
+        padding: 0;
+        max-height: none;
+    }
+
+    .sidebar-nav .navbar ul {
+        float: none;
+        border-bottom: 5px;
+    }
+
+    .sidebar-nav ul:not {
+        display: block;
+    }
+
+
+    .sidebar-nav li {
+        float: none;
+        display: block;
+        background-color: white;
+    }
+
+        .sidebar-nav li a {
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+
+        .sidebar-nav li.sideNavHeader {
+            float: none;
+            display: block;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            padding-left: 15px;
+            background-color: #F3F3F3;
+            color: black;
+            font-size: 1.2em;
+        }
+
+    /*Row Fluid Over-ride*/
+    .row {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
