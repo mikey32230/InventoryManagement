@@ -1,8 +1,15 @@
 ﻿@model IEnumerable<InventoryManagement.Asset>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Manage Assets";
 }
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#owner").autocomplete({
+            source: '@Url.Action("getOwners")'
+        });
+    });
+</script>
 
 <h2>Manage Assets</h2>
 
@@ -39,10 +46,10 @@
                     <input type="text" name="serialNumber" id="serialNumber" class="form-control tableSearch" placeholder="Serial Number" />
                 </td>
                 <td>
-                    <input type="text" name="modelName" id="modelName" class="form-control tableSearch" placeholder="Model Names" />
+                    @Html.DropDownList("AssetModelId", null, "No Selection", htmlAttributes: new { @class = "form-control" })
                 </td>
                 <td>
-                    <input type="text" name="owner" id="owner" class="form-control tableSearch" placeholder="LastName FirstName" />
+                    <input type="text" name="owner" id="owner" class="form-control autocomplete tableSearch" placeholder="LastName FirstName" autocomplete="off" />
                 </td>
                 <td>
                     <input type="text" name="roomNumber" id="roomNumber" class="form-control tableSearch" placeholder="Room #" />

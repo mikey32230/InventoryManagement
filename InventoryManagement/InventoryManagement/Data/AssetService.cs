@@ -20,9 +20,9 @@ namespace InventoryManagement.Data
             {
                 assets = assets.Where(a => a.SerialNumber == query.serialNumber);
             }
-            if (!String.IsNullOrEmpty(query.modelName))
+            if (query.AssetModelId != null)
             {
-                assets = assets.Where(a => a.AssetModel.Name == query.modelName);
+                assets = assets.Where(a => a.AssetModel.Id== query.AssetModelId);
             }
             if (!String.IsNullOrEmpty(query.owner))
             {
@@ -31,13 +31,12 @@ namespace InventoryManagement.Data
                 //Trim whitespace 
                 var stringPartition = query.owner.Split(' ');
                 String lName = stringPartition[0].Trim();
-                assets = assets.Where(a=>a.AssetUser.LastName.StartsWith(lName)); 
-                if(stringPartition.Length >=2)
+                assets = assets.Where(a=>a.AssetUser.LastName.Equals(lName));
+                if (stringPartition.Length >= 2)
                 {
                     String fNAme = stringPartition[1].Trim();
-                    assets = assets.Where(a=>a.AssetUser.FirstName.StartsWith(fNAme));
+                    assets = assets.Where(a => a.AssetUser.FirstName.Equals(fNAme));
                 }
-                
             }
             if (!String.IsNullOrEmpty(query.roomNumber))
             {

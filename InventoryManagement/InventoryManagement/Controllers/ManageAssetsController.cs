@@ -22,15 +22,9 @@ namespace InventoryManagement.Controllers
         public ActionResult Index()
         {
             var assets = db.Assets.Include(a => a.AssetModel).Include(a => a.AssetUser);
-            //Option to use ViewModel - Coded before learning about DisplayTemplates
 
-            //List<AssetViewModel> viewModel = new List<AssetViewModel>();  
-            //foreach(Asset a in assets)
-            //{
-            //    var toAddViewModel = new AssetViewModel();
-            //    toAddViewModel.asset = a; 
-            //    viewModel.Add(toAddViewModel); 
-            //}
+            ViewBag.AssetModelId = new SelectList(db.AssetModels, "Id", "Name");
+           
             return View(assets);
 
         }
@@ -39,7 +33,10 @@ namespace InventoryManagement.Controllers
         // Post: ManageAssets
         public ActionResult Index(AssetQuery query)
         {
-            var assets = service.searchAssets(query);  
+            
+            var assets = service.searchAssets(query);
+            ViewBag.AssetModelId = new SelectList(db.AssetModels, "Id", "Name");
+          
             return View(assets);
         }
 
@@ -63,6 +60,8 @@ namespace InventoryManagement.Controllers
         {
             ViewBag.AssetModelId = new SelectList(db.AssetModels, "Id", "Name");
             ViewBag.AssetOwner = new SelectList(db.AssetUsers, "AspNetUserId", "FirstName");
+        
+           
             return View();
         }
 
@@ -177,6 +176,22 @@ namespace InventoryManagement.Controllers
 
             //ViewBag.AssetOwner = new SelectList(db.AssetUsers, "AspNetUserId", "FirstName", asset.AssetOwner);
             return View(asset);
+        }
+
+        public ActionResult getOwners(String term)
+        {
+            
+            var owners = db.AssetUsers.Where(u => u.Assets.Count >= 1);
+            List<String> ownerNames = new List<String>(); 
+            foreach(AssetUser user in owners)
+            {
+                string lname = user.LastName;
+                string fname = user.FirstName; 
+                ownerNames.Add(lname + " " +fname);
+            }
+            var filteredNames = ownerNames.Where(o => o.StartsWith(term, true, null));
+            return Json(filteredNames, JsonRequestBehavior.AllowGet);
+
         }
 
         protected override void Dispose(bool disposing)
