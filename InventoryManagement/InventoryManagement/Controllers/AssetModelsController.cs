@@ -9,17 +9,17 @@ namespace InventoryManagement.Controllers
     [Authorize]
     public class AssetModelsController : Controller
     {
+        private InventoryEntities context = new InventoryEntities();
         // GET: AssetModels
         public ActionResult Index()
         {
-            InventoryEntities context = new InventoryEntities();
             return View(context.AssetModels);
         }
 
         // GET: AssetModels/Create
         public ActionResult Create()          
         {
-            InventoryEntities context = new InventoryEntities();
+           // ViewBag.TypeId = new SelectList(context.AssetTypes, "Id", "Type");
             return View(new AssetModel(context.AssetTypes));
         }
 
@@ -27,7 +27,6 @@ namespace InventoryManagement.Controllers
         [HttpPost]
         public ActionResult Create(AssetModel am)
         {
-            InventoryEntities context = new InventoryEntities();
             context.AssetModels.Add(am);
             context.SaveChanges();
             return RedirectToAction("Index", "AssetModels");
