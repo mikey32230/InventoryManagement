@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace InventoryManagement.Controllers
 {
@@ -10,7 +11,10 @@ namespace InventoryManagement.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            InventoryEntities db = new InventoryEntities(); 
+            string userId = @User.Identity.GetUserId();
+            var assets = db.Assets.Where(u => u.AssetUser.AspNetUserId == userId); 
+            return View(assets);
         }
 
         public ActionResult About()

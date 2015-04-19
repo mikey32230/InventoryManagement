@@ -26,8 +26,8 @@ namespace InventoryManagement
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/themes/base/jquery.ui.core.css",
+              "~/Content/bootstrap.css",
+              "~/Content/themes/base/jquery.ui.core.css",
               "~/Content/themes/base/jquery.ui.resizable.css",
               "~/Content/themes/base/jquery.ui.selectable.css",
               "~/Content/themes/base/jquery.ui.accordion.css",
@@ -39,7 +39,7 @@ namespace InventoryManagement
               "~/Content/themes/base/jquery.ui.datepicker.css",
               "~/Content/themes/base/jquery.ui.progressbar.css",
               "~/Content/themes/base/jquery.ui.theme.css",
-                      "~/Content/site.css"));
+              "~/Content/site.css"));
         }
     }
 }

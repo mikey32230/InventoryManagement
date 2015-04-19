@@ -13,14 +13,15 @@
     });
 </script>
 
-<h2>Manage Assets</h2>
+<h2>Manage Assets <a href="@Url.Action("Create", "ManageAssets")" class="btn btn-primary btn-xs pull-right">Add Asset</a></h2>
+
 
 @using (Html.BeginForm())
 {
     {
+        
         <table class="table table-striped">
             <thead>
-                <a href="@Url.Action("Create", "ManageAssets")" class="btn btn-primary btn-xs pull-right">Add Asset</a>
                 <tr>
                     <th>
                         Serial Number
@@ -71,6 +72,7 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.AssetModel.Name)
+                       
                     </td>
                     <td>
                         @*@Html.DisplayFor(modelItem => item.AssetUser.LastName)*@

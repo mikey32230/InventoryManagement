@@ -31,7 +31,10 @@ namespace InventoryManagement.Data
                 //Trim whitespace 
                 var stringPartition = query.owner.Split(' ');
                 String lName = stringPartition[0].Trim();
-                assets = assets.Where(a=>a.AssetUser.LastName.Equals(lName));
+                if(!(String.IsNullOrEmpty(lName)))
+                {
+                    assets = assets.Where(a => a.AssetUser.LastName.Equals(lName));
+                }
                 if (stringPartition.Length >= 2)
                 {
                     String fNAme = stringPartition[1].Trim();
