@@ -1,0 +1,51 @@
+﻿@model InventoryManagement.AssetModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete Asset Model</h2>
+
+<h4>Are you sure you want to delete the following Asset Model?</h4>
+<div class="form-group">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Manufacturer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Manufacturer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssetType.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssetType.Type)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-group form-actions no-color col-md-offset-2">
+        <input type="submit" value="Delete" class="btn btn-default" />
+    </div>
+    <div class="form-group form-actions">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+    }
+</div>

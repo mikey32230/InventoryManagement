@@ -24,8 +24,12 @@ using System.Web.Mvc;
         }
 
         [Display(Name="Model")]
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Manufacturer { get; set; }
+        [Display(Name="Asset Type")]
+        [Required]
         public Nullable<int> TypeId { get; set; }
     
         public virtual ICollection<Asset> Assets { get; set; }

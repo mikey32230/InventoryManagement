@@ -213,7 +213,6 @@
       <DependentUpon>InventoryEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AssetModel.cs" />
     <Compile Include="Models\AssetViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -347,6 +346,7 @@
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\AssetModels\Edit.cshtml" />
     <Content Include="Views\ManageAssets\Reassign.cshtml" />
+    <Content Include="Views\AssetModels\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
