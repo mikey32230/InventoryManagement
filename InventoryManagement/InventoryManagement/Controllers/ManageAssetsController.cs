@@ -12,7 +12,7 @@ using InventoryManagement.Data;
 
 namespace InventoryManagement.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class ManageAssetsController : Controller
     {
         private InventoryEntities db = new InventoryEntities();
@@ -60,8 +60,8 @@ namespace InventoryManagement.Controllers
         {
             ViewBag.AssetModelId = new SelectList(db.AssetModels, "Id", "Name");
             ViewBag.AssetOwner = new SelectList(db.AssetUsers, "AspNetUserId", "FirstName");
-        
-           
+
+            ViewBag.AssetTypesList = new SelectList(db.AssetTypes, "Id", "Type"); 
             return View();
         }
 
@@ -69,7 +69,7 @@ namespace InventoryManagement.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       // [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,AssetModelId,PurchaseDate,SerialNumber,RoomNum,AssetOwner")] Asset asset)
         {
             if (ModelState.IsValid)
@@ -81,6 +81,8 @@ namespace InventoryManagement.Controllers
 
             ViewBag.AssetModelId = new SelectList(db.AssetModels, "Id", "Name", asset.AssetModelId);
             ViewBag.AssetOwner = new SelectList(db.AssetUsers, "AspNetUserId", "FirstName", asset.AssetOwner);
+
+            ViewBag.AssetTypes = new SelectList(db.AssetTypes, "Id", "Type"); 
             return View(asset);
         }
 

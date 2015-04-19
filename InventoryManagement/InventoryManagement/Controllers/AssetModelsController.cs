@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace InventoryManagement.Controllers
 {
-    [Authorize]
+   // [Authorize]
     public class AssetModelsController : Controller
     {
         private InventoryEntities context = new InventoryEntities();
@@ -28,6 +28,7 @@ namespace InventoryManagement.Controllers
 
         // POST: AssetModels/Create
         [HttpPost]
+      //  [ValidateAntiForgeryToken]
         public ActionResult Create(AssetModel assetModel)
         {
             context.AssetModels.Add(assetModel);

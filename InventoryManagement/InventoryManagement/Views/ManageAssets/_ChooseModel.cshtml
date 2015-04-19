@@ -1,0 +1,27 @@
+﻿@model InventoryManagement.Asset
+
+
+
+    <button id="create-model" class="btn btn-lg btn-success" style="line-height:.3" data-toggle="modal" data-target="#basicModal">Add New Model</button>
+
+
+
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                <h4 class="modal-title" id="myModalLabel">Create Model</h4>
+            </div>
+            <div class="modal-body">
+                
+@using (Html.BeginForm("Create", "AssetModels"))
+{
+    @Html.AntiForgeryToken()
+                <h3>@Html.Partial("~/Views/AssetModels/Create.cshtml")</h3>
+}
+            </div>
+
+        </div>
+    </div>
+</div>

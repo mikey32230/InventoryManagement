@@ -347,6 +347,7 @@
     <Content Include="Views\AssetModels\Edit.cshtml" />
     <Content Include="Views\ManageAssets\Reassign.cshtml" />
     <Content Include="Views\AssetModels\Delete.cshtml" />
+    <Content Include="Views\ManageAssets\_ChooseModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
