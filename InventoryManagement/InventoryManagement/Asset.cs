@@ -23,6 +23,8 @@ namespace InventoryManagement
         [DataType(DataType.Date)]
         public Nullable<System.DateTime> PurchaseDate { get; set; }
         public string SerialNumber { get; set; }
+        
+        [RegularExpression(@"^\D+\d+$", ErrorMessage= "Plese enter a valid room number")]
         public string RoomNum { get; set; }
         public string AssetOwner { get; set; }
     

@@ -21,9 +21,10 @@ namespace InventoryManagement.Controllers
         // GET: ManageAssets
         public ActionResult Index()
         {
-            var assets = db.Assets.Include(a => a.AssetModel).Include(a => a.AssetUser);
+            var assets = db.Assets.Include(a => a.AssetModel).Include(a => a.AssetUser).Include(a=>a.AssetModel.AssetType);
 
             ViewBag.AssetModelId = new SelectList(db.AssetModels, "Id", "Name");
+            ViewBag.AssetTypeId = new SelectList(db.AssetTypes, "Id", "Type"); 
            
             return View(assets);
 
@@ -36,6 +37,7 @@ namespace InventoryManagement.Controllers
             
             var assets = service.searchAssets(query);
             ViewBag.AssetModelId = new SelectList(db.AssetModels, "Id", "Name");
+            ViewBag.AssetTypeId = new SelectList(db.AssetTypes, "Id", "Type");
           
             return View(assets);
         }
