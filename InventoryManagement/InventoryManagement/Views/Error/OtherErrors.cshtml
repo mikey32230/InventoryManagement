@@ -1,4 +1,7 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
+﻿@{
+    ViewBag.Title = "OtherErrors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 @{
     ViewBag.Title = "Error";
@@ -9,7 +12,5 @@
 <div id="#accordion" style="text-align: center">
     <img src="~/Content/images/imgurError.gif" alt="Error Icon" style="width:250px;height:300px">
     <h4>We apologize, but an error occurred while processing your request.</h4>
-    <br />
-    @*<h4> Error Detail: @Model.Exception</h4>*@
 </div>
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data;
+using System.Data.Entity;
 
 namespace InventoryManagement.Controllers
 {
@@ -14,7 +16,8 @@ namespace InventoryManagement.Controllers
         // GET: AssetModels
         public ActionResult Index()
         {
-            return View(context.AssetModels);
+            var assetmodels = context.AssetModels.Include(x => x.AssetType);
+            return View(assetmodels);
         }
 
         // GET: AssetModels/Create

@@ -11,11 +11,13 @@ using InventoryManagement;
 namespace InventoryManagement.Controllers
 {
     [Authorize]
+    [HandleError]
     public class AssetTypesController : Controller
     {
         private InventoryEntities db = new InventoryEntities();
 
         // GET: AssetTypes
+        [HandleError]
         public ActionResult Index()
         {
             return View(db.AssetTypes.ToList());
