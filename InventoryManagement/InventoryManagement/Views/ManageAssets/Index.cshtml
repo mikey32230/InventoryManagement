@@ -19,7 +19,7 @@
 @using (Html.BeginForm())
 {
     {
-        
+
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -27,17 +27,19 @@
                         Serial Number
                     </th>
                     <th>
-                        Model Name
+                        Type
+                    </th>
+                    <th>
+                        Model
                     </th>
                     <th>
                         Asset Owner
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.RoomNum)
-
+                        Room Number
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.PurchaseDate)
+                        Purchased
                     </th>
 
                     <th class="text-center" colspan="3">Action</th>
@@ -47,6 +49,9 @@
             <tr>
                 <td>
                     <input type="text" name="serialNumber" id="serialNumber" class="form-control tableSearch" placeholder="Serial Number" />
+                </td>
+                <td>
+                    @Html.DropDownList("AssetTypeId", null, "No Selection", htmlAttributes: new { @class = "form-control" })
                 </td>
                 <td>
                     @Html.DropDownList("AssetModelId", null, "No Selection", htmlAttributes: new { @class = "form-control" })
@@ -71,13 +76,13 @@
                         @Html.DisplayFor(modelItem => item.SerialNumber)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.AssetModel.Name)
-                       
+                        @Html.DisplayFor(modelItem => item.AssetModel.AssetType.Type)
                     </td>
                     <td>
-                        @*@Html.DisplayFor(modelItem => item.AssetUser.LastName)*@
+                        @Html.DisplayFor(modelItem => item.AssetModel.Name)
+                    </td>
+                    <td>
                         @String.Concat(@item.AssetUser.LastName, " ", @item.AssetUser.FirstName)
-
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.RoomNum)

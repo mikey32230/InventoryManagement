@@ -24,6 +24,10 @@ namespace InventoryManagement.Data
             {
                 assets = assets.Where(a => a.AssetModel.Id== query.AssetModelId);
             }
+            if(query.AssetTypeId != null)
+            {
+                assets = assets.Where(a => a.AssetModel.AssetType.Id == query.AssetTypeId);
+            }
             if (!String.IsNullOrEmpty(query.owner))
             {
                 
