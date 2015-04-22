@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 
 namespace InventoryManagement.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
