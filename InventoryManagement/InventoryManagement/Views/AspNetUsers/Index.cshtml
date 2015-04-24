@@ -1,0 +1,69 @@
+﻿@model IEnumerable<InventoryManagement.AspNetUser>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssetUser.FirstName)
+        </th>
+        <th> 
+            @Html.DisplayNameFor(model => model.AssetUser.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccessFailedCount)
+        </th>
+        <th>
+          @Html.DisplayNameFor(model => model.AspNetRoles.FirstOrDefault().Name) 
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssetUser.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssetUser.LastName)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.AccessFailedCount)
+        </td>
+        <td>
+        @Html.DisplayFor(modelItem => item.AspNetRoles.FirstOrDefault().Name)   
+        </td>
+    <td class="text-center">
+        @if (item.AspNetRoles.FirstOrDefault() != null) {  
+            @Html.ActionLink("Edit Roles", "Edit", item) 
+        }
+            </td>
+    
+      
+</tr>
+}
+    
+</table>
+

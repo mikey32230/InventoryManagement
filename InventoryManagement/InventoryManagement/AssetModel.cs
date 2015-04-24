@@ -6,30 +6,22 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
 
 namespace InventoryManagement
 {
     using System;
     using System.Collections.Generic;
-using System.Web.Mvc;
     
     public partial class AssetModel
     {
-        public int Id { get; set; }
-
         public AssetModel()
         {
             this.Assets = new HashSet<Asset>();
         }
-
-        [Display(Name="Model")]
-        [Required]
+    
+        public int Id { get; set; }
         public string Name { get; set; }
-        [Required]
         public string Manufacturer { get; set; }
-        [Display(Name="Asset Type")]
-        [Required]
         public Nullable<int> TypeId { get; set; }
     
         public virtual ICollection<Asset> Assets { get; set; }
