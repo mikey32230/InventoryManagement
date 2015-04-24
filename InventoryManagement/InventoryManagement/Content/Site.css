@@ -73,12 +73,13 @@ body {
 }
 
 
+/*Center the Search Button - Requires webkit*/
 .tableSearchButton {
     margin-left: 50%;
     -webkit-transform: translateX(-50%);
 }
 
-/* make sidebar nav vertical */
+/* Vertical Sidebar */
 @media (min-width: 768px) {
     .sidebar-nav .navbar .navbar-collapse {
         padding: 0;
@@ -122,5 +123,18 @@ body {
         margin-left: 0px;
         margin-right: 0px;
     }
-}
 
+
+    /*Modals*/
+    body .modal {
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: auto;
+        margin-top: 50px;
+    }
+
+    .modal-open .modal, .btn:focus {
+        outline: none !important;
+    }
+}

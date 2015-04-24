@@ -15,7 +15,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model=>model.AssetModel)
+        @Html.HiddenFor(model =>  model.AssetModelId)
         @Html.HiddenFor(model=>model.RoomNum)
         @Html.HiddenFor(model => model.PurchaseDate)
         @Html.HiddenFor(model => model.SerialNumber)

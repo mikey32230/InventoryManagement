@@ -57,6 +57,24 @@ namespace InventoryManagement.Data
 
             return assets; 
         }
+
+        //For Autcomplete of Owner's names 
+        public IEnumerable<String> getOwners(String term)
+        {
+            var owners = db.AssetUsers.Where(u => u.Assets.Count >= 1);
+            List<String> ownerNames = new List<String>(); 
+            foreach (AssetUser user in owners)
+            {     
+                ownerNames.Add(user.getFullName());
+            }
+            var filteredNames = ownerNames.Where(o => o.StartsWith(term, true, null)); 
+            if(filteredNames.Count()==0)
+            {
+                filteredNames = ownerNames.Where(o => o.EndsWith(term, true, null)); 
+            }
+            return filteredNames; 
+        }
     
     }
+  
 }

@@ -67,9 +67,7 @@ namespace InventoryManagement.Controllers
             return View();
         }
 
-        // POST: ManageAssets/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: ManageAssets/Create  
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,AssetModelId,PurchaseDate,SerialNumber,RoomNum,AssetOwner")] Asset asset)
@@ -86,6 +84,50 @@ namespace InventoryManagement.Controllers
 
             ViewBag.AssetTypes = new SelectList(db.AssetTypes, "Id", "Type"); 
             return View(asset);
+        }
+
+
+        // GET: ManageAssets/EditPARTIAL/5
+        public ActionResult _EditPartial(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Asset asset = db.Assets.Find(id);
+            if (asset == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.AssetModelId = new SelectList(db.AssetModels, "Id", "Name", asset.AssetModelId);
+            return View(asset);
+        }
+
+        // POST: ManageAssets/EditPARTIAL/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult  _EditPartial(Asset asset)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(asset).State = EntityState.Modified;
+                db.SaveChanges();
+                db.ChangeTracker.DetectChanges();
+
+                //Elusive fix for navigation property woes 
+                if(db.Entry(asset).Reference(x=>x.AssetModel).IsLoaded == false)
+                {
+                    db.Entry(asset).Reference(x => x.AssetModel).Load(); 
+                }
+                if (db.Entry(asset).Reference(x => x.AssetUser).IsLoaded == false)
+                {
+                    db.Entry(asset).Reference(x => x.AssetUser).Load();
+                }
+               return PartialView("~/Views/ManageAssets/_AssetRow.cshtml", asset); 
+           } 
+            
+            //ViewBag.AssetModelId = new SelectList(db.AssetModels, "Id", "Name", asset.AssetModelId);
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         // GET: ManageAssets/Edit/5
@@ -105,8 +147,6 @@ namespace InventoryManagement.Controllers
         }
 
         // POST: ManageAssets/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,AssetModelId,PurchaseDate,SerialNumber,RoomNum,AssetOwner")] Asset asset)
@@ -118,7 +158,6 @@ namespace InventoryManagement.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.AssetModelId = new SelectList(db.AssetModels, "Id", "Name", asset.AssetModelId);
-            //ViewBag.AssetOwner = new SelectList(db.AssetUsers, "AspNetUserId", "FirstName", asset.AssetOwner);
             return View(asset);
         }
 
@@ -164,12 +203,10 @@ namespace InventoryManagement.Controllers
             return View(asset);
         }
 
-        // POST: ManageAssets/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: ManageAssets/Reassign/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Reassign([Bind(Include = "Id,AssetModelId,PurchaseDate,SerialNumber,RoomNum,AssetOwner")] Asset asset)
+        public ActionResult Reassign ([Bind(Include = "Id, AssetModelId, PurchaseDate, SerialNumber, RoomNum, AssetOwner")]Asset asset)
         {
             if (ModelState.IsValid)
             {
@@ -177,25 +214,14 @@ namespace InventoryManagement.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            //ViewBag.AssetOwner = new SelectList(db.AssetUsers, "AspNetUserId", "FirstName", asset.AssetOwner);
-            return View(asset);
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);  
         }
 
         public ActionResult getOwners(String term)
         {
-            
-            var owners = db.AssetUsers.Where(u => u.Assets.Count >= 1);
-            List<String> ownerNames = new List<String>(); 
-            foreach(AssetUser user in owners)
-            {
-                string lname = user.LastName;
-                string fname = user.FirstName; 
-                ownerNames.Add(lname + " " +fname);
-            }
-            var filteredNames = ownerNames.Where(o => o.StartsWith(term, true, null));
-            return Json(filteredNames, JsonRequestBehavior.AllowGet);
 
+            var filteredNames = service.getOwners(term);
+            return Json(filteredNames, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

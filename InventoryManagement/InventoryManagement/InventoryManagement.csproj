@@ -288,6 +288,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -355,6 +357,11 @@
     <Content Include="Views\Error\OtherErrors.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\AssetModels\EditPartial.cshtml" />
+    <Content Include="Views\AssetModels\_tableRow.cshtml" />
+    <Content Include="Views\ManageAssets\_AssetRow.cshtml" />
+    <Content Include="Views\ManageAssets\_EditPartial.cshtml" />
+    <Content Include="Views\ManageAssets\_Modal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

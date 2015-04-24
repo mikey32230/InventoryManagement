@@ -24,22 +24,22 @@
             <thead>
                 <tr>
                     <th>
-                        Serial Number
+                        @Html.DisplayNameFor(model => model.SerialNumber)
                     </th>
                     <th>
-                        Type
+                        @Html.DisplayNameFor(model => model.AssetModel.AssetType.Type)
                     </th>
                     <th>
-                        Model
+                       @Html.DisplayNameFor(model => model.AssetModel.Name)
                     </th>
                     <th>
-                        Asset Owner
+                        @Html.DisplayNameFor(model => model.AssetUser.fullName)
                     </th>
                     <th>
-                        Room Number
+                        @Html.DisplayNameFor(model => model.RoomNum)
                     </th>
                     <th>
-                        Purchased
+                        @Html.DisplayNameFor(model => model.PurchaseDate)
                     </th>
 
                     <th class="text-center" colspan="3">Action</th>
@@ -71,40 +71,39 @@
             </tr>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SerialNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AssetModel.AssetType.Type)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AssetModel.Name)
-                    </td>
-                    <td>
-                        @String.Concat(@item.AssetUser.LastName, " ", @item.AssetUser.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RoomNum)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PurchaseDate)
-                    </td>
-                    <td class="text-center">
-                        <a href="@Url.Action("Reassign", "ManageAssets", new{id=item.Id})" class="btn btn-xs btn btn-success"><span class="glyphicon glyphicon-user"></span></a>
-                    </td>
-                    <td class="text-center">
-                        <a href="@Url.Action("Edit", "ManageAssets", new{id=item.Id})" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span></a>
-                    </td>
-                    <td class="text-center">
-                        <a href="@Url.Action("Delete", "ManageAssets", new { id=item.Id })" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></a>
-                    </td>
-                </tr>
+                Html.RenderPartial("_AssetRow", item);
             }
 
         </table>
-    }
-
+    } 
 }
+
+
+<!-- Default Bootstrap Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="form" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#editModal").on("show.bs.modal", function (e) {
+        var link = $(e.relatedTarget);
+        $(this).find(".modal-body").load(link.attr("href"));
+    });
+    $(document).on("hidden.bs.modal", function (e) {
+        $(e.target).removeData("bs.modal").find(".modal-content").empty();
+    });
+
+</script>
 
 

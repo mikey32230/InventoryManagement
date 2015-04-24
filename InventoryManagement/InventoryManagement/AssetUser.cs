@@ -11,6 +11,8 @@ namespace InventoryManagement
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     
     public partial class AssetUser
     {
@@ -25,5 +27,18 @@ namespace InventoryManagement
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual ICollection<Asset> Assets { get; set; }
+
+
+        //Will the ORM know this isn't a database Column? 
+        [Display(Name = "Owner")]
+        public String fullName
+        {
+            get { return this.getFullName(); }
+        }
+        public String getFullName()
+        {
+            string fullName = String.Concat(this.LastName, " ", this.FirstName);
+            return fullName;
+        }
     }
 }

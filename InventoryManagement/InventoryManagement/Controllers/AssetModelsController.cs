@@ -39,6 +39,33 @@ namespace InventoryManagement.Controllers
             return RedirectToAction("Index", "AssetModels");
         }
 
+        // GET: AssetModels/EditPartial/5
+        public ActionResult EditPartial(int id)
+        {
+            var assetModel = context.AssetModels.Where(x => x.Id == id).FirstOrDefault();
+            ViewBag.AssetTypesList = new SelectList(context.AssetTypes.OrderByDescending(x => x.Id == id), "Id", "Type");
+
+            return View(assetModel);
+        }
+
+
+        // Post: AssetModels/EditPartial/5
+        [HttpPost]
+        public PartialViewResult EditPartial(AssetModel assetModel)
+        {
+            AssetModel dbAssetModel = context.AssetModels.Find(assetModel.Id);
+            dbAssetModel.Assets = assetModel.Assets;
+            dbAssetModel.AssetType = assetModel.AssetType;
+            dbAssetModel.Manufacturer = assetModel.Manufacturer;
+            dbAssetModel.Name = assetModel.Name;
+            dbAssetModel.TypeId = assetModel.TypeId;
+            context.SaveChanges();
+
+
+            return PartialView("~/Views/AssetModels/_tableRow.cshtml", dbAssetModel);
+        }
+
+
         // GET: AssetModels/Edit/5
         public ActionResult Edit(int id)
         {
@@ -47,6 +74,7 @@ namespace InventoryManagement.Controllers
 
             return View(assetModel);
         }
+
 
         // POST: AssetModels/Edit/5
         [HttpPost]
@@ -59,6 +87,7 @@ namespace InventoryManagement.Controllers
             dbAssetModel.Name = assetModel.Name;
             dbAssetModel.TypeId = assetModel.TypeId;
             context.SaveChanges();
+            ViewBag.AssetTypesList = new SelectList(context.AssetTypes, "Id", "Type");
 
             return RedirectToAction("Index", "AssetModels");
         }

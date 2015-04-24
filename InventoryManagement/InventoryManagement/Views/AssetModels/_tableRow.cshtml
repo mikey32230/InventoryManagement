@@ -1,0 +1,23 @@
+﻿@model InventoryManagement.AssetModel
+<tr id="model-@Model.Id">
+    <td>
+        @Html.DisplayFor(modelItem => @Model.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => @Model.Manufacturer)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => @Model.AssetType.Type)
+    </td>
+    <td class="text-center">
+
+        <!-- Modal Trigger-->
+        <a href="@Url.Action("EditPartial", "AssetModels", new { id=@Model.Id})" data-toggle="modal" data-target="#editModal" class="btn btn-info btn-xs">
+            Edit
+        </a>
+        <a href="@Url.Action("Delete", "AssetModels", new { id=@Model.Id })" class="btn btn-danger btn-xs">
+            <span class="glyphicon glyphicon-remove"></span>
+            Del
+        </a>
+    </td>
+</tr>

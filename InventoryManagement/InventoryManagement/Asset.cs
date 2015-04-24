@@ -21,14 +21,22 @@ namespace InventoryManagement
        
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [DataType(DataType.Date)]
+        [Display(Name="Purchase Date")]
         public Nullable<System.DateTime> PurchaseDate { get; set; }
+        
+        [Display(Name="Serial Number")]
         public string SerialNumber { get; set; }
         
         [RegularExpression(@"^\D+\d+$", ErrorMessage= "Plese enter a valid room number")]
+        [Display(Name="Room Number")]
         public string RoomNum { get; set; }
+        
+        
+      
         public string AssetOwner { get; set; }
     
         public virtual AssetModel AssetModel { get; set; }
         public virtual AssetUser AssetUser { get; set; }
+
     }
 }
