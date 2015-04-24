@@ -61,8 +61,7 @@ namespace InventoryManagement.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName, AspNetRoles")] AspNetUser aspNetUser)
         {
-            try
-            {
+           
                 // Your code...
                 // Could also be before try if you know the exception occurs in SaveChanges
                 if (ModelState.IsValid)
@@ -73,21 +72,8 @@ namespace InventoryManagement.Controllers
                 }
                 ViewBag.Id = new SelectList(db.AssetUsers, "AspNetUserId", "FirstName", aspNetUser.Id);
                 return View(aspNetUser);
-            }
-            catch (System.Data.Entity.Validation.DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
-                throw;
-            }
+            
+            
            
         }
 

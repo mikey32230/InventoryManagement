@@ -187,6 +187,7 @@
       <DependentUpon>InventoryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AspNetRolesController.cs" />
     <Compile Include="Controllers\AspNetUsersController.cs" />
     <Compile Include="Controllers\AssetModelsController.cs" />
     <Compile Include="Controllers\AssetTypesController.cs" />
@@ -358,6 +359,7 @@
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\AspNetUsers\Index.cshtml" />
     <Content Include="Views\AspNetUsers\Edit.cshtml" />
+    <Content Include="Views\AspNetRoles\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

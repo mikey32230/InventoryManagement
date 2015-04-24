@@ -53,16 +53,16 @@
             @Html.DisplayFor(modelItem => item.AccessFailedCount)
         </td>
         <td>
-          @Html.DisplayFor(modelItem => item.AspNetRoles.FirstOrDefault().Name) 
+        @Html.DisplayFor(modelItem => item.AspNetRoles.FirstOrDefault().Name)    
         </td>
-        <td class="text-center">
-            <a href=@Url.Action("Edit", "AspNetUsers", new{id=item.Id}) class='btn btn-info btn-xs'>
+    <td class="text-center">
+            <a href=@Url.Action("Edit", "AspNetRoles", item.AspNetRoles.FirstOrDefault()) class='btn btn-info btn-xs'>
                 <span class="glyphicon glyphicon-edit"></span>
                Give Admin 
             </a>
             </td>
     
-        
+      
 </tr>
 }
     
