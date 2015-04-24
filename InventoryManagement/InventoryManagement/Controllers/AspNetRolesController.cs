@@ -59,17 +59,10 @@ namespace InventoryManagement.Controllers
         }
 
         // GET: AspNetRoles/Edit/5
-        public ActionResult Edit(AspNetRole aspNetRole, string empty)
+        public ActionResult Edit()
         {
-            if (aspNetRole.Id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            if (aspNetRole == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aspNetRole);
+            AspNetRole role = TempData["RoleData"] as AspNetRole;
+            return View(role); 
         }
 
         // POST: AspNetRoles/Edit/5
@@ -83,7 +76,7 @@ namespace InventoryManagement.Controllers
             {
                 db.Entry(aspNetRole).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "AspNetUsers");
             }
             return View(aspNetRole);
         }

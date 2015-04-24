@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Edit @ViewBag.Message role</h2>
 
 
 @using (Html.BeginForm())
@@ -17,12 +17,11 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
-        <small> Type the role you want to assign this person. Note that "Admin" has special priveleges.</small>
         <div class="form-group">
-            @Html.LabelFor(model => model.AspNetRoles.FirstOrDefault().Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AspNetRoles.FirstOrDefault().Id, "Role", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.AspNetRoles.FirstOrDefault().Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AspNetRoles.FirstOrDefault().Name, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.AspNetRoles, (SelectList)ViewBag.AspNetRoles, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AspNetRoles, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">

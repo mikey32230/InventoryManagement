@@ -12,7 +12,7 @@ using InventoryManagement.Data;
 
 namespace InventoryManagement.Controllers
 {
-    [Authorize(Roles = "Admin")]
+   // [Authorize(Roles = "Admin")]
     public class ManageAssetsController : Controller
     {
         private InventoryEntities db = new InventoryEntities();
