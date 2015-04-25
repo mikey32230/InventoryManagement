@@ -51,23 +51,15 @@ namespace InventoryManagement.Controllers
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-<<<<<<< HEAD
             }
             IEnumerable<SelectListItem> roles = new SelectList(db.AspNetRoles, "Id", "Name");  
             var viewModel = new EditRolesViewModel();  
             viewModel.roles = roles;
             viewModel.userId = id; 
-
-            
+ 
             return View(viewModel);
-=======
+
             } 
-            RoleViewModel model = new RoleViewModel { UserId = id};
-            
-            ViewBag.AspNetRoles = new SelectList(db.AspNetRoles, "Id", "Name");
-            return View(model);
->>>>>>> origin/master
-        }
 
       
         // POST: AspNetUsers/Edit/5
