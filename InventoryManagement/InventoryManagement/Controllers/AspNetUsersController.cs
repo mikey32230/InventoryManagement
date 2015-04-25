@@ -7,7 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using InventoryManagement;
-using System.Diagnostics; 
+using System.Diagnostics;
+using InventoryManagement.Models; 
 
 namespace InventoryManagement.Controllers
 {
@@ -51,15 +52,13 @@ namespace InventoryManagement.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
-            if (aspNetUser == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Id = new SelectList(db.AssetUsers, "AspNetUserId", "FirstName", aspNetUser.Id);
-            ViewBag.AspNetRoles = new SelectList(db.AspNetRoles, "Id", "Name");
-            ViewBag.message = aspNetUser.UserName;
-            return View(aspNetUser);
+            IEnumerable<SelectListItem> roles = new SelectList(db.AspNetRoles, "Id", "Name");  
+            var viewModel = new EditRolesViewModel();  
+            viewModel.roles = roles;
+            viewModel.userId = id; 
+
+            
+            return View(viewModel);
         }
 
       
@@ -68,47 +67,14 @@ namespace InventoryManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(AspNetUser aspNetUser)
+        public ActionResult Edit(EditRolesViewModel viewModel)
         {
-           
-                // Your code...
-                // Could also be before try if you know the exception occurs in SaveChanges
+            var user = db.AspNetUsers.Find(viewModel.userId);
+            var roleToAdd = db.AspNetRoles.Find(viewModel.roleSelection);
+            user.AspNetRoles.Add(roleToAdd);
+            db.SaveChanges();
 
-            try
-                    {
-                
-                        AspNetUser dbuser = db.AspNetUsers.Find(aspNetUser.Id);
-                        dbuser.Id = aspNetUser.Id;
-                        dbuser.Email = aspNetUser.Email;
-                        dbuser.EmailConfirmed = aspNetUser.EmailConfirmed;
-                        dbuser.PasswordHash = aspNetUser.PasswordHash;
-                        dbuser.SecurityStamp = aspNetUser.SecurityStamp;
-                        dbuser.PhoneNumberConfirmed = aspNetUser.PhoneNumberConfirmed;
-                        dbuser.TwoFactorEnabled = aspNetUser.TwoFactorEnabled;
-                        dbuser.LockoutEndDateUtc = aspNetUser.LockoutEndDateUtc;
-                        dbuser.LockoutEnabled = aspNetUser.LockoutEnabled;
-                        dbuser.AccessFailedCount = aspNetUser.AccessFailedCount;
-                        dbuser.UserName = aspNetUser.UserName;
-                        
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-                }
-             
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-            {
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
-                    }
-                }
-            }
-                ViewBag.Id = new SelectList(db.AssetUsers, "AspNetUserId", "FirstName", aspNetUser.Id); 
-                ViewBag.AspNetRoles = new SelectList(db.AspNetRoles, "Id", "Name");
-                return View(aspNetUser);
-            
-            
+            return RedirectToAction("Index"); 
            
         }
 

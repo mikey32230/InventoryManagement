@@ -14,8 +14,21 @@ namespace InventoryManagement.Controllers
         {
             InventoryEntities db = new InventoryEntities(); 
             string userId = @User.Identity.GetUserId();
-            var assets = db.Assets.Where(u => u.AssetUser.AspNetUserId == userId); 
+            var user = db.AspNetUsers.Where(u=>u.Id == userId).Single();
+            
+            var assets = db.Assets.Where(u => u.AssetUser.AspNetUserId == userId);
+            var permission = user.AspNetRoles.FirstOrDefault();
+            if (permission == null)
+            {
+                Session["elevated"] = false;
+            }
+            else
+            {
+                Session["elevated"] = true;
+            }
+            ViewBag.elevated = Session["elevated"]; 
             return View(assets);
+
         }
 
         public ActionResult About()
