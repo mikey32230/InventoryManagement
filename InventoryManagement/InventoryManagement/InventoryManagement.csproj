@@ -221,6 +221,7 @@
     <Compile Include="Models\EditRolesViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -356,7 +357,6 @@
     <Content Include="Views\ManageAssets\Reassign.cshtml" />
     <Content Include="Views\AssetModels\Delete.cshtml" />
     <Content Include="Views\ManageAssets\_ChooseModel.cshtml" />
-    <Content Include="Views\Error\OtherErrors.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\AssetModels\EditPartial.cshtml" />

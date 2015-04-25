@@ -51,6 +51,7 @@ namespace InventoryManagement.Controllers
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+<<<<<<< HEAD
             }
             IEnumerable<SelectListItem> roles = new SelectList(db.AspNetRoles, "Id", "Name");  
             var viewModel = new EditRolesViewModel();  
@@ -59,6 +60,13 @@ namespace InventoryManagement.Controllers
 
             
             return View(viewModel);
+=======
+            } 
+            RoleViewModel model = new RoleViewModel { UserId = id};
+            
+            ViewBag.AspNetRoles = new SelectList(db.AspNetRoles, "Id", "Name");
+            return View(model);
+>>>>>>> origin/master
         }
 
       
@@ -67,6 +75,7 @@ namespace InventoryManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public ActionResult Edit(EditRolesViewModel viewModel)
         {
             var user = db.AspNetUsers.Find(viewModel.userId);
@@ -74,8 +83,7 @@ namespace InventoryManagement.Controllers
             user.AspNetRoles.Add(roleToAdd);
             db.SaveChanges();
 
-            return RedirectToAction("Index"); 
-           
+            return RedirectToAction("Index");   
         }
 
         // GET: AspNetUsers/Delete/5
