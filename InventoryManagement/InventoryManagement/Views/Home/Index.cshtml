@@ -1,15 +1,60 @@
-﻿@{
+﻿@model IEnumerable<InventoryManagement.Asset>
+
+@{
     ViewBag.Title = "Your Assets";
 }
 
 <link href="http://jquery-ui-bootstrap.github.io/jquery-ui-bootstrap/css/custom-theme/jquery-ui-1.10.3.custom.css" type="text/css" rel="stylesheet">
 
 <h2>Your Assets</h2>
+@using (Html.BeginForm())
+{
+    {
 
-This is the Index!!!!
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Serial Number
+                    </th>
+                    <th>
+                        Type
+                    </th>
+                    <th>
+                        Model
+                    </th>
+                    <th>
+                        Room Number
+                    </th>
+                    <th>
+                        Purchased
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SerialNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AssetModel.AssetType.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AssetModel.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomNum)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PurchaseDate)
+                        </td>
+                    </tr>
+                }
+            </thead>
+        </table>
+    }
+}
 <p> There's a lady who's sure</p>
 <p> All that glitters is gold</p>
 <p> And she's buying a stairway</p>
 <p> To the House of the Holy</p>
-
-mika@osu.edu
