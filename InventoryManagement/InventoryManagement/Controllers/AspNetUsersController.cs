@@ -12,6 +12,8 @@ using InventoryManagement.Models;
 
 namespace InventoryManagement.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
     public class AspNetUsersController : Controller
     {
         private InventoryEntities db = new InventoryEntities();
