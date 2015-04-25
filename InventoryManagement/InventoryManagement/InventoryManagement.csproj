@@ -356,7 +356,6 @@
     <Content Include="Views\ManageAssets\Reassign.cshtml" />
     <Content Include="Views\AssetModels\Delete.cshtml" />
     <Content Include="Views\ManageAssets\_ChooseModel.cshtml" />
-    <Content Include="Views\Error\OtherErrors.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\AssetModels\EditPartial.cshtml" />

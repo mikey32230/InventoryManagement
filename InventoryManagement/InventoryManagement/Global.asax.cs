@@ -24,6 +24,7 @@ namespace InventoryManagement
             Server.ClearError();
             var routeData = new RouteData();
             routeData.Values["controller"] = "Error";
+            HttpStatusCodeResult b = new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
 
             if ((Context.Server.GetLastError() is HttpException) && ((Context.Server.GetLastError() as HttpException).GetHttpCode() != 404))
             {
