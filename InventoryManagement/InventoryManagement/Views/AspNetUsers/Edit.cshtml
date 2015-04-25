@@ -1,4 +1,4 @@
-﻿@model InventoryManagement.AspNetUser
+﻿@model InventoryManagement.Models.RoleViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -15,13 +15,13 @@
         <h4>AspNetUser</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.UserId)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AspNetRoles.FirstOrDefault().Id, "Role", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RoleId, "Role", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.AspNetRoles, (SelectList)ViewBag.AspNetRoles, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AspNetRoles, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.RoleId, (SelectList)ViewBag.AspNetRoles, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
