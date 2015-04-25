@@ -8,6 +8,7 @@ namespace InventoryManagement.Models
     public class RoleViewModel
     {
         public String RoleId;
-        public String UserId; 
+        public String UserId;
+        public String Name; 
     }
 }

@@ -64,7 +64,7 @@ namespace InventoryManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserId, RoleId")] RoleViewModel model)
+        public ActionResult Edit([Bind(Include = "UserId,RoleId")] RoleViewModel model)
         {
            
                 // Your code...
