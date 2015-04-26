@@ -1,0 +1,16 @@
+﻿@model InventoryManagement.AssetModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+
+<a href="@Url.Action("_CreateModel")" data-toggle="modal" data-target="#basicModal" class="btn btn-lg btn-success">
+    Add New Model
+</a>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

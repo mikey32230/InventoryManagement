@@ -356,7 +356,7 @@
     <Content Include="Views\AssetModels\Edit.cshtml" />
     <Content Include="Views\ManageAssets\Reassign.cshtml" />
     <Content Include="Views\AssetModels\Delete.cshtml" />
-    <Content Include="Views\ManageAssets\_ChooseModel.cshtml" />
+    <Content Include="Views\ManageAssets\_CreateModel.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\AssetModels\EditPartial.cshtml" />
@@ -366,6 +366,9 @@
     <Content Include="Views\ManageAssets\_Modal.cshtml" />
     <Content Include="Views\AspNetUsers\Index.cshtml" />
     <Content Include="Views\AspNetUsers\Edit.cshtml" />
+    <Content Include="Views\Shared\_LayoutNonElevated.cshtml" />
+    <Content Include="Views\ManageAssets\_CreatePartial.cshtml" />
+    <Content Include="Views\Shared\modal_layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

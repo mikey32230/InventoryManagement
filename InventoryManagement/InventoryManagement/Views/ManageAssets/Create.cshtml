@@ -2,12 +2,14 @@
 
 @{
     ViewBag.Title = "Create";
+    
 }
 
 <h2>Create Asset</h2>
 
 
-@Html.Partial("_ChooseModel")
+@Html.Partial("_CreatePartial") 
+
 
 @using (Html.BeginForm()) 
 {
@@ -19,8 +21,8 @@
         <div class="form-group">
 
            @Html.LabelFor(model => model.AssetModelId, "AssetModelId", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("AssetModelId", null, htmlAttributes: new { @class = "form-control" })
+        <div class="col-md-10" >
+            @Html.DropDownList("AssetModelId", null, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })
             @Html.ValidationMessageFor(model => model.AssetModelId, "", new { @class = "text-danger" })
         </div>
                
@@ -69,3 +71,28 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+<div class="modal fade" id="basicModal" tabindex="-1" role="form" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $("#basicModal").on("show.bs.modal", function (e) {
+        var link = $(e.relatedTarget);
+        $(this).find(".modal-body").load(link.attr("href"));
+    });
+    $(document).on("hidden.bs.modal", function (e) {
+        $(e.target).removeData("bs.modal").find(".modal-content").empty();
+    });
+
+</script>

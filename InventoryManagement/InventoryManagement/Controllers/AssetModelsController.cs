@@ -39,6 +39,7 @@ namespace InventoryManagement.Controllers
             return RedirectToAction("Index", "AssetModels");
         }
 
+      
         // GET: AssetModels/EditPartial/5
         public ActionResult EditPartial(int id)
         {

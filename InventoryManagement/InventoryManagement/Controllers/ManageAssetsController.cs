@@ -64,6 +64,7 @@ namespace InventoryManagement.Controllers
             ViewBag.AssetOwner = new SelectList(db.AssetUsers, "AspNetUserId", "FirstName");
 
             ViewBag.AssetTypesList = new SelectList(db.AssetTypes, "Id", "Type"); 
+
             return View();
         }
 
@@ -128,6 +129,28 @@ namespace InventoryManagement.Controllers
             
             //ViewBag.AssetModelId = new SelectList(db.AssetModels, "Id", "Name", asset.AssetModelId);
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+        public ActionResult _CreateModel()
+        {
+            ViewBag.AssetTypesList = new SelectList(db.AssetTypes, "Id", "Type");
+
+            return View();
+        }
+
+        [HttpPost] 
+        [ValidateAntiForgeryToken]
+        public ActionResult _CreateModel(AssetModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                db.AssetModels.Add(model); 
+                db.SaveChanges();
+                db.ChangeTracker.DetectChanges();
+            }
+
+            return PartialView("_CreatePartial");
+            
         }
 
         // GET: ManageAssets/Edit/5

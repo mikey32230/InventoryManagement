@@ -4,7 +4,7 @@
     ViewBag.Title = "Your Assets";
     if(Session["elevated"].Equals(false))
     {
-        Layout = "";
+        Layout = "~/Views/Shared/_LayoutNonElevated.cshtml";
     }  
 }
 
@@ -58,7 +58,3 @@
         </table>
     }
 }
-<p> There's a lady who's sure</p>
-<p> All that glitters is gold</p>
-<p> And she's buying a stairway</p>
-<p> To the House of the Holy</p>
