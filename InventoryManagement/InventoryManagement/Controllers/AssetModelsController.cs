@@ -8,7 +8,7 @@ using System.Data.Entity;
 
 namespace InventoryManagement.Controllers
 {
-   // [Authorize]
+    [Authorize(Roles="Admin")]
     public class AssetModelsController : Controller
     {
         private InventoryEntities context = new InventoryEntities();
@@ -16,7 +16,8 @@ namespace InventoryManagement.Controllers
         // GET: AssetModels
         public ActionResult Index()
         {
-            var assetmodels = context.AssetModels.Include(x => x.AssetType);
+
+            IEnumerable<AssetModel> assetmodels = context.AssetModels.Include(x => x.AssetType);
             return View(assetmodels);
         }
 
@@ -24,14 +25,14 @@ namespace InventoryManagement.Controllers
         [HttpGet]
         public ActionResult Create()          
         {
-            ViewBag.AssetTypesList = new SelectList(context.AssetTypes, "Id", "Type");
+            ViewBag.AssetTypesList = new SelectList(context.AssetTypes, "Id","Type");
 
             return View();
         }
 
         // POST: AssetModels/Create
         [HttpPost]
-      //  [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(AssetModel assetModel)
         {
             context.AssetModels.Add(assetModel);
