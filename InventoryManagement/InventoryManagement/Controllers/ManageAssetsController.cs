@@ -153,37 +153,6 @@ namespace InventoryManagement.Controllers
             
         }
 
-        // GET: ManageAssets/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Asset asset = db.Assets.Find(id);
-            if (asset == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.AssetModelId = new SelectList(db.AssetModels, "Id", "Name", asset.AssetModelId);
-            return View(asset);
-        }
-
-        // POST: ManageAssets/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,AssetModelId,PurchaseDate,SerialNumber,RoomNum,AssetOwner")] Asset asset)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(asset).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.AssetModelId = new SelectList(db.AssetModels, "Id", "Name", asset.AssetModelId);
-            return View(asset);
-        }
-
         // GET: ManageAssets/Delete/5
         public ActionResult Delete(int? id)
         {
