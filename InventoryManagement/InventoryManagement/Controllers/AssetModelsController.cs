@@ -66,33 +66,6 @@ namespace InventoryManagement.Controllers
             return PartialView("~/Views/AssetModels/_tableRow.cshtml", dbAssetModel);
         }
 
-
-        // GET: AssetModels/Edit/5
-        public ActionResult Edit(int id)
-        {
-            var assetModel = context.AssetModels.Where(x => x.Id == id).FirstOrDefault();
-            ViewBag.AssetTypesList = new SelectList(context.AssetTypes.OrderByDescending(x => x.Id == id), "Id", "Type");
-
-            return View(assetModel);
-        }
-
-
-        // POST: AssetModels/Edit/5
-        [HttpPost]
-        public ActionResult Edit(AssetModel assetModel)
-        {
-            AssetModel dbAssetModel = context.AssetModels.Find(assetModel.Id);
-            dbAssetModel.Assets = assetModel.Assets;
-            dbAssetModel.AssetType = assetModel.AssetType;
-            dbAssetModel.Manufacturer = assetModel.Manufacturer;
-            dbAssetModel.Name = assetModel.Name;
-            dbAssetModel.TypeId = assetModel.TypeId;
-            context.SaveChanges();
-            ViewBag.AssetTypesList = new SelectList(context.AssetTypes, "Id", "Type");
-
-            return RedirectToAction("Index", "AssetModels");
-        }
-
         // GET: AssetModels/Delete/5
         public ActionResult Delete(int id)
         {
