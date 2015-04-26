@@ -1,6 +1,13 @@
 ﻿@model InventoryManagement.Models.IndexViewModel
 @{
     ViewBag.Title = "Manage";
+
+    if (Session["elevated"].Equals(false))
+    {
+        Layout = "~/Views/Shared/_LayoutNonElevated.cshtml";
+    }  
+        
+    
 }
 
 <h2>@ViewBag.Title.</h2>
