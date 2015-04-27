@@ -14,10 +14,6 @@
             @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-
-        <th>
             @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
@@ -30,7 +26,10 @@
             @Html.DisplayNameFor(model => model.AccessFailedCount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetRoles.FirstOrDefault().Name)
+            Role Type
+        </th>
+        <th>
+            Edit Roles
         </th>
     </tr>
 
@@ -41,9 +40,6 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
@@ -52,7 +48,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.AssetUser.LastName)
             </td>
-
             <td>
                 @Html.DisplayFor(modelItem => item.AccessFailedCount)
             </td>

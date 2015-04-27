@@ -149,7 +149,8 @@ namespace InventoryManagement.Controllers
                 db.ChangeTracker.DetectChanges();
             }
 
-            return PartialView("_CreatePartial");
+            ViewBag.AssetModelId = new SelectList(db.AssetModels, "Id", "Name");
+            return PartialView("_ModelDropdown", new Asset());
             
         }
 

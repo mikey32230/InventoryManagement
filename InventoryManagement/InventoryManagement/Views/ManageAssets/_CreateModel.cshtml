@@ -5,8 +5,9 @@
     Layout = "~/Views/Shared/modal_layout.cshtml";
     AjaxOptions ajaxOpts = new AjaxOptions
     {
+        UpdateTargetId = "dropdownModel", 
         InsertionMode = InsertionMode.ReplaceWith,
-        OnSuccess = "$('#basicModal').modal('hide');"
+        OnSuccess= "$('#basicModal').modal('hide');"
     };
 }
 
